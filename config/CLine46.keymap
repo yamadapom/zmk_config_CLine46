@@ -24,11 +24,6 @@
             bindings = <&kp LS(TAB)>;
             key-positions = <12 13>;
         };
-
-        MB3 {
-            bindings = <&mkp MB3>;
-            key-positions = <19 20 19 20>;
-        };
     };
 
     macros {
