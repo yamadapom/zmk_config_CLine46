@@ -96,10 +96,10 @@
 
         layer_5 {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans                    &kp LG(LEFT_ARROW)  &kp PAGE_UP     &kp UP_ARROW    &kp PAGE_DOWN    &kp LG(RIGHT_ARROW)  &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &kp LC(Z)           &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp ENTER            &trans
-&trans  &trans  &trans  &trans  &trans  &trans                    &kp LC(Y)           &kp HOME        &mkp MB2        &kp END          &trans               &trans
-        &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans                                              &trans           &trans
+&trans  &trans  &kp PAGE_UP     &kp UP_ARROW    &kp PAGE_DOWN    &trans                    &kp LG(LEFT_ARROW)  &kp PAGE_UP     &kp UP_ARROW    &kp PAGE_DOWN    &kp LG(RIGHT_ARROW)  &trans
+&trans  &trans  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans                    &kp LC(Z)           &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &kp ENTER            &trans
+&trans  &trans  &kp HOME        &mkp MB2        &kp END          &trans                    &kp LC(Y)           &kp HOME        &mkp MB2        &kp END          &trans               &trans
+        &trans  &trans          &trans          &trans           &trans  &trans    &trans  &trans                                              &trans           &trans
             >;
         };
 
