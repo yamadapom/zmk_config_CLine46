@@ -15,14 +15,34 @@
     combos {
         compatible = "zmk,combos";
 
-        tab {
-            bindings = <&kp TAB>;
-            key-positions = <11 12>;
+        centerClick {
+            bindings = <&mkp MB3>;
+            key-positions = <19 20>;
         };
 
         shift_tab {
             bindings = <&kp LS(TAB)>;
             key-positions = <12 13>;
+        };
+
+        rightClick {
+            bindings = <&mkp MB2>;
+            key-positions = <20 21>;
+        };
+
+        prevClick {
+            bindings = <&mkp MB4>;
+            key-positions = <31 32>;
+        };
+
+        clickNext {
+            bindings = <&mkp MB5>;
+            key-positions = <32 33>;
+        };
+
+        deltetkey {
+            bindings = <&kp DELETE>;
+            key-positions = <8 9>;
         };
     };
 
