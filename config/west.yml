@@ -10,28 +10,30 @@ manifest:
       url-base: https://github.com/takamaru-fpv
 
   projects:
-    # ZMK: DYA Studio 用カスタム RPC サブシステム付き cormoran fork
+    # ZMK: DYA Studio 用カスタム RPC サブシステム付き cormoran fork（v0.3 系に固定）
     - name: zmk
       remote: cormoran
-      revision: main+dya
+      revision: v0.3-branch+dya
       import: app/west.yml
     - name: zmk-feature-non-lipo-battery-management
       remote: takamaru-fpv
       revision: voltage_division
 
     # DYA Studio モジュール（すべて cormoran リポジトリ）
+    # 注意: 各モジュールの main は ZMK v0.4 への移行が進んでいるため、
+    #       v0.3 系 ZMK(上記)と組み合わせるには v0.3 対応リビジョンに固定すること。
     - name: zmk-module-ble-management
       remote: cormoran
-      revision: main
+      revision: zmk-v0.3.0.0          # main は v0.4 へ移行済み(2026-05-31)。v0.3 タグに固定
     - name: zmk-module-battery-history
       remote: cormoran
-      revision: main
+      revision: 307755dd2ad4d320e14de162e8e5ef018f29d929  # v0.3 期の main HEAD(2026-02-24)を固定
     - name: zmk-module-settings-rpc
       remote: cormoran
-      revision: main
+      revision: ad1c995cf910ca989ecd6352a1d0b41ccb18362c  # v0.3 期の main HEAD(2026-02-11)を固定
     - name: zmk-module-runtime-input-processor
       remote: cormoran
-      revision: main
+      revision: zmk-v0.3.0.0          # main は 2引数(v0.4)版。v0.3 タグに固定 ← 今回のビルドエラーの直接原因
     - name: zmk-pmw3610-driver
       remote: badjeff
       revision: zmk-0.3
