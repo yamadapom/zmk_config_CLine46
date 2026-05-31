@@ -1,14 +1,12 @@
 #include "CLine46.dtsi"
-#include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <input/processors.dtsi>
-#include <input/processors/runtime-input-processor.dtsi>
 #include <behaviors/battery_history_request.dtsi>
 
 &default_transform {
     col-offset = <6>;
 };
 
-// AML(オートマウスレイヤー)挙動の調整 ─ LiNEA40 を参考
+// AML(オートマウスレイヤー)挙動 ─ LiNEA40 を参考
 &zip_temp_layer {
     require-prior-idle-ms = <200>;
 
@@ -54,18 +52,22 @@
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;  //P0.09を指定(CS)
+    cs-gpios = <&gpio0 9 GPIO_ACTIVE_LOW>;
 
     trackball: trackball@0 {
-    ...
-    irq-gpios = <&xiao_d 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;  // ← 変更しない(CLine46のピン)
+        status = "okay";
+        compatible = "pixart,pmw3610";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&xiao_d 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 
-    snipe-layers = <2>;     // 追加 ★CLine46のスナイプ用レイヤーに合わせる
-    scroll-layers = <5 3>;  // 追加(CLine46で現在スクロールにしているレイヤー)
+        // LiNEA40 方式: スナイプ/スクロールをドライバ側で処理
+        snipe-layers = <2>;
+        scroll-layers = <5 3>;
+    };
 };
-
 
 &trackball_listener {
     status = "okay";
-    input-processors = <&zip_temp_layer 6 10000>;  // オートマウスレイヤーのみ
+    input-processors = <&zip_temp_layer 6 10000>;
 };
