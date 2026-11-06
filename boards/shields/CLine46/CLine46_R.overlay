@@ -1,3 +1,4 @@
+
 #include "CLine46.dtsi"
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <input/processors.dtsi>
@@ -6,15 +7,6 @@
 
 &default_transform {
     col-offset = <6>;
-};
-
-// AML(オートマウスレイヤー)挙動の調整 ─ LiNEA40 を参考
-&zip_temp_layer {
-    require-prior-idle-ms = <200>;
-
-    excluded-positions = <
-        19 // J
-    >;
 };
 
 
@@ -62,8 +54,7 @@
         reg = <0>;
         spi-max-frequency = <2000000>;
         irq-gpios = <&xiao_d 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        cpi = <900>;
-        force-awake;   // restモード無効化: 動かし始めのもたつきを解消(※電池消費は増える)
+        cpi = <600>;
         //swap-xy;
         evt-type = <INPUT_EV_REL>;
         x-input-code = <INPUT_REL_X>;
@@ -74,19 +65,22 @@
 // Overrides for the input listener node
 &trackball_listener {
     status = "okay";
-    input-processors = <&mouse_runtime_input_processor>,
-        //<&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
+    input-processors =<&mouse_runtime_input_processor>,
+        //<&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;         //Y軸反転
         //<&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
-        <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,         //X軸反転
-        <&zip_temp_layer 6 10000>;                            //オートマウスレイヤー: レイヤー6を10秒間アクティブ化
+        <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>;       //X軸反転
+        //<&zip_temp_layer 2 1000>;                            //オートマウスレイヤーの選択;
 
 
     scroller {
-        layers = <5 3>;
-        input-processors =
+        layers = <3>;
+        input-processors = 
+            // <&zip_xy_transform INPUT_TRANSFORM_XY_SWAP>,        //X軸とY軸の入れ替え
+            // <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,       //X軸反転
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,       //Y軸反転
             <&zip_xy_to_scroll_mapper>,                         //スクロールモードに変更
             <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>,   //スクロールのX軸反転
-            <&zip_scroll_scaler 1 5>;                           //スクロール量を1/5倍
+            //<&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,   //スクロールのY軸反転
+            <&zip_scroll_scaler 1 8>;                           //スクロール量を1/8倍
     };
 };
